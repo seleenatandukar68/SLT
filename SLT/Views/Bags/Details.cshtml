@@ -1,0 +1,118 @@
+﻿@model SLT.Models.Bag
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Bag</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BagBrand)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BagBrand)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cost)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ColorList)
+        </dt>
+        @foreach (var item in Model.ColorList)
+        {
+            if (item.isChecked)
+            {
+                <dd>
+                    @item.ColorName
+                </dd>
+            }
+        }
+        <dt>
+
+        </dt>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="slideshow-container">
+
+                    @foreach (var item in Model.BagsPictures)
+                    {
+
+                        <div class="mySlides">
+
+                            <img alt="@item.PicId" class="img-responsive"
+                                 src="data:image/jpg;base64,@Convert.ToBase64String(item.FileContent)"  />
+
+                            <div class="text">Caption Text</div>
+                        </div>
+
+
+                    }
+                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                </div>
+                <br>
+
+                <div style="text-align:center">
+                    @for (var i = 1; i <= Model.BagsPictures.Count; i++)
+                    {
+                        <span class="dot" onclick="currentSlide(@i)"></span>
+                    }
+
+
+                </div>
+            </div>
+        </div>
+ 
+
+    </dl>
+
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.BagId }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+
+</div>
+@*<script>
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+        if (n > slides.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = slides.length }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+    }
+</script>*@
+@section scripts{
+
+    <script src="~/ViewScripts/Slider.js"></script>
+}

@@ -1,0 +1,53 @@
+﻿@model IEnumerable<SLT.Models.BagsColors>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div>
+    <h4>Bag</h4>
+    <hr />
+    <table>
+
+            <tr>
+
+                <th>  ColorId </th>
+                <th> BagId </th>
+            </tr>
+            @foreach (var item in Model)
+            {
+
+    <tr>
+
+
+        <td>
+            @Html.DisplayFor(model => item.BagId)
+
+        </td>
+        <td>
+            @Html.DisplayFor(model => item.ColorId)
+
+        </td>
+        <td>
+            @Html.DisplayFor(model => item.Bag.BagBrand)
+        </td>
+        <td>
+            @Html.DisplayFor(model => item.Color.ColorName)
+        </td>
+
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.BagId })
+        </td>
+    </tr>
+            }
+
+        
+           
+        </table>
+
+</div>
+<p>|
+    @Html.ActionLink("Back to List", "Index")
+</p>
