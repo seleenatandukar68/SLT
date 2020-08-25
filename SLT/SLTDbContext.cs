@@ -28,7 +28,8 @@ namespace SLT
             //    .MapLeftKey("BagId")
             //    .MapRightKey("ColorId")
             //    .ToTable("BagsColors"));
-            modelBuilder.Entity<BagsColors>().HasKey(bc => new { bc.BagId, bc.ColorId });
+
+            modelBuilder.Entity<BagsColors>().HasKey(bc => new { bc.BagId,bc.ColorId });
           
             modelBuilder.Entity<Color>().Ignore(c => c.isChecked);
             //modelBuilder.Entity<Bag>()

@@ -1,0 +1,11 @@
+﻿body {
+}
+.myCircle {
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    padding: 8px;
+   
+    display: inline-block;
+}
+ 

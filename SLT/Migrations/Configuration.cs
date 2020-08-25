@@ -5,7 +5,9 @@
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
+    using System.Data.Entity.Validation;
     using System.Linq;
+    using System.Text;
 
     internal sealed class Configuration : DbMigrationsConfiguration<SLT.SLTDbContext>
     {
@@ -23,21 +25,21 @@
             //  to avoid creating duplicate seed data.
             var bagCategories = new List<Category>
             {
-                new Category {CatName = "PartyBags"},
-                new Category {CatName = "ShoppingBags"},
-                new Category {CatName = "SideBags"}
+                new Category {CatName = "Tote Bag"},
+                new Category {CatName = "Shopping Bag"},
+                new Category {CatName = "Shoulder Bag"}
             };
             bagCategories.ForEach(c => dbContext.Categories.AddOrUpdate(cat => cat.CatName, c));
-            dbContext.SaveChanges();
+            SaveChanges(dbContext);
             //Seeding bags 
             var bags = new List<Bag>
             {
-            new Bag{BagBrand="LV", Cost =100, CategoryId=1},
-            new Bag{BagBrand = "Channel", Cost = 2000,CategoryId =2}
+            new Bag{BagBrand="LV", Cost =1000,sellCost= 1500, CategoryId=1},
+            new Bag{BagBrand = "Channel", Cost = 2000,sellCost= 2500, CategoryId =2}
             };
 
             bags.ForEach(b => dbContext.Bags.AddOrUpdate(p => p.BagBrand, b));
-            dbContext.SaveChanges();
+            SaveChanges(dbContext);
 
             //seeding colors
             var colors = new List<Color>
@@ -48,19 +50,21 @@
             };
 
             colors.ForEach(c => dbContext.Colors.AddOrUpdate(p=>p.ColorName, c));
-            dbContext.SaveChanges();
+            SaveChanges(dbContext);
 
             //seeding bagcolor
             var bagsColors = new BagsColors[] {
             new BagsColors
             {
                 BagId = bags.Single(b =>b.BagBrand == "Channel").BagId,
-                ColorId = colors.Single(c => c.ColorName== "Red").Id
+                ColorId = colors.Single(c => c.ColorName== "Red").Id,
+                Quantity = 30
             } ,
             new BagsColors
             {
                 BagId = bags.Single(b =>b.BagBrand == "LV").BagId,
-                ColorId = colors.Single(c => c.ColorName== "Green").Id
+                ColorId = colors.Single(c => c.ColorName== "Green").Id,
+                Quantity=20
             },
 
             };
@@ -69,10 +73,37 @@
                 dbContext.BagsColors.AddOrUpdate(bc);
             }
 
-            dbContext.SaveChanges();
+            SaveChanges(dbContext);
 
 
             base.Seed(dbContext);
+        }
+
+        private void SaveChanges(DbContext context)
+        {
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (DbEntityValidationException ex)
+            {
+                StringBuilder sb = new StringBuilder();
+
+                foreach (var failure in ex.EntityValidationErrors)
+                {
+                    sb.AppendFormat("{0} failed validation\n", failure.Entry.Entity.GetType());
+                    foreach (var error in failure.ValidationErrors)
+                    {
+                        sb.AppendFormat("- {0} : {1}", error.PropertyName, error.ErrorMessage);
+                        sb.AppendLine();
+                    }
+                }
+
+                throw new DbEntityValidationException(
+                    "Entity Validation Failed - errors follow:\n" +
+                    sb.ToString(), ex
+                ); // Add the original exception as the innerException
+            }
         }
     }
 }

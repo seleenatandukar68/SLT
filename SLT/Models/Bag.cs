@@ -11,13 +11,17 @@ namespace SLT.Models
     public class Bag
     {
         public int BagId { get; set; }
-        [Required]        
+        [Required]
+        [Display(Name = "Brand Name")]
         public string BagBrand { get; set; }
         [Required]
+        [Display(Name = "Cost Price")]
         public float Cost { get; set; }
-      
-        [NotMapped]
         [Required]
+        [Display(Name = "Selling Price")]
+        public float sellCost { get; set; }
+        [NotMapped]
+        
         [DataType(DataType.Upload)]
         [Display(Name = "Select File")]
         public HttpPostedFileBase[] files { get; set; }
@@ -26,6 +30,8 @@ namespace SLT.Models
         public int CategoryId { get; set; } // many to one with category
         [ForeignKey("CategoryId")]
         public virtual Category Category { get; set; }
+
+
         public virtual ICollection<BagsColors> BagsColors { get; set; } // many to many with colors 
 
 

@@ -7,13 +7,13 @@ namespace SLT.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class InitialCreate : IMigrationMetadata
+    public sealed partial class AddingPrice : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddingPrice));
         
         string IMigrationMetadata.Id
         {
-            get { return "202008130425470_InitialCreate"; }
+            get { return "202008240446031_AddingPrice"; }
         }
         
         string IMigrationMetadata.Source

@@ -167,6 +167,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\Style\myStyle.css" />
     <Content Include="Content\Style\Slider.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -192,20 +193,15 @@
     </Compile>
     <Compile Include="Interface\IBagRepository.cs" />
     <Compile Include="Interface\ISLTRepository.cs" />
-    <Compile Include="Migrations\202008130425470_InitialCreate.cs" />
-    <Compile Include="Migrations\202008130425470_InitialCreate.designer.cs">
-      <DependentUpon>202008130425470_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\202008240255006_Initial.cs" />
+    <Compile Include="Migrations\202008240255006_Initial.designer.cs">
+      <DependentUpon>202008240255006_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202008160138552_noGuid.cs" />
-    <Compile Include="Migrations\202008160138552_noGuid.designer.cs">
-      <DependentUpon>202008160138552_noGuid.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202008160412066_PicUpload.cs" />
-    <Compile Include="Migrations\202008160412066_PicUpload.designer.cs">
-      <DependentUpon>202008160412066_PicUpload.cs</DependentUpon>
+    <Compile Include="Migrations\202008240446031_AddingPrice.cs" />
+    <Compile Include="Migrations\202008240446031_AddingPrice.designer.cs">
+      <DependentUpon>202008240446031_AddingPrice.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="ModelBuilderExtension.cs" />
     <Compile Include="Models\Bag.cs" />
     <Compile Include="Models\BagsColors.cs" />
     <Compile Include="Models\Category.cs" />
@@ -248,14 +244,11 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202008130425470_InitialCreate.resx">
-      <DependentUpon>202008130425470_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202008240255006_Initial.resx">
+      <DependentUpon>202008240255006_Initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202008160138552_noGuid.resx">
-      <DependentUpon>202008160138552_noGuid.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202008160412066_PicUpload.resx">
-      <DependentUpon>202008160412066_PicUpload.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202008240446031_AddingPrice.resx">
+      <DependentUpon>202008240446031_AddingPrice.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -3,16 +3,16 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class PicUpload : DbMigration
+    public partial class AddingPrice : DbMigration
     {
         public override void Up()
         {
-            AddColumn("dbo.Picture", "FileContent", c => c.Binary());
+            AddColumn("dbo.Bag", "sellCost", c => c.Single(nullable: false));
         }
         
         public override void Down()
         {
-            DropColumn("dbo.Picture", "FileContent");
+            DropColumn("dbo.Bag", "sellCost");
         }
     }
 }
