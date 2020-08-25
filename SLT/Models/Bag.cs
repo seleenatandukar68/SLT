@@ -20,6 +20,9 @@ namespace SLT.Models
         [Required]
         [Display(Name = "Selling Price")]
         public float sellCost { get; set; }
+        [Required]
+        [Display(Name = "Quantity")]
+        public int Quantity { get; set; }
         [NotMapped]
         
         [DataType(DataType.Upload)]
@@ -46,7 +49,8 @@ namespace SLT.Models
         [Display(Name = "Bag Picture")]
         public virtual ICollection<Picture> BagsPictures { get; set; }
 
-        
+        [NotMapped]
+        public Picture thumbPic { get; set; }
 
     }
 }

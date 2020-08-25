@@ -34,8 +34,8 @@
             //Seeding bags 
             var bags = new List<Bag>
             {
-            new Bag{BagBrand="LV", Cost =1000,sellCost= 1500, CategoryId=1},
-            new Bag{BagBrand = "Channel", Cost = 2000,sellCost= 2500, CategoryId =2}
+            new Bag{BagBrand="LV", Cost =1000,sellCost= 1500,Quantity=50, CategoryId=1},
+            new Bag{BagBrand = "Channel", Cost = 2000,sellCost= 2500,Quantity=60, CategoryId =2}
             };
 
             bags.ForEach(b => dbContext.Bags.AddOrUpdate(p => p.BagBrand, b));
@@ -57,14 +57,14 @@
             new BagsColors
             {
                 BagId = bags.Single(b =>b.BagBrand == "Channel").BagId,
-                ColorId = colors.Single(c => c.ColorName== "Red").Id,
-                Quantity = 30
+                ColorId = colors.Single(c => c.ColorName== "Red").Id
+               
             } ,
             new BagsColors
             {
                 BagId = bags.Single(b =>b.BagBrand == "LV").BagId,
-                ColorId = colors.Single(c => c.ColorName== "Green").Id,
-                Quantity=20
+                ColorId = colors.Single(c => c.ColorName== "Green").Id
+               
             },
 
             };

@@ -10,6 +10,8 @@ using SLT;
 using SLT.Models;
 using SLT.DAL;
 using System.IO;
+using System.Diagnostics;
+using SLT.ViewModel;
 
 namespace SLT.Controllers
 {
@@ -20,7 +22,22 @@ namespace SLT.Controllers
         // GET: Bags
         public ActionResult Index()
         {
-            return View(bagRepo.GetBags());
+            var data =
+            (from b in db.Bags
+             join p in db.Pictures on b.BagId equals p.BagId
+             select new { b, p } into bs
+             group bs by bs.b.BagBrand into g select
+                                       new BagDTO
+                                       {
+                                           BagBrand = g.Key,    
+                                           BagId = g.Select(gid => gid.b.BagId).FirstOrDefault(),
+                                           FileContent = (Byte[])g.Select(gp => gp.p.FileContent).FirstOrDefault(),
+                                            
+                                          }).ToList();
+
+       
+
+            return View(data);
         }
 
         // GET: Bags/Details/5
@@ -86,7 +103,7 @@ namespace SLT.Controllers
             Picture Fd = new Picture();
             String FileExt = Path.GetExtension(files.FileName).ToUpper();
 
-            if (FileExt == ".PNG" || FileExt == ".JPG")
+            if (FileExt == ".PNG" || FileExt == ".JPG"|| FileExt == ".JPEG")
             {
                 Stream str = files.InputStream;
                 BinaryReader Br = new BinaryReader(str);
@@ -119,7 +136,7 @@ namespace SLT.Controllers
             }
             Bag bag = bagRepo.GetBagById(id);
             List<SelectListItem> selectListItems = bagRepo.GetCategories();
-            selectListItems.Find(c => c.Value == id.ToString()).Selected = true;
+            selectListItems.Find(c => c.Value == bag.CategoryId.ToString()).Selected = true;
             bag.CategoryList = selectListItems;
             if (bag == null)
             {

@@ -33,7 +33,11 @@ namespace SLT.DAL
         }
         public List<Bag> GetBags()
         {
-           return SLTDbContext.Bags.ToList();
+           
+            return
+             (from b in SLTDbContext.Bags
+              join p in SLTDbContext.Pictures on b.BagId equals p.BagId
+              select b).ToList();
         }
 
         public Bag AddBag (Bag newBag)
@@ -103,6 +107,8 @@ namespace SLT.DAL
                 }
                 bag.BagBrand = uptBag.BagBrand;
                 bag.Cost = uptBag.Cost;
+                bag.sellCost = uptBag.sellCost;
+                bag.Quantity = uptBag.Quantity;
                 bag.CategoryId = uptBag.CategoryId;
                 foreach (var item in uptBag.ColorList)
                 {

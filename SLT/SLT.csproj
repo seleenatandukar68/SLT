@@ -201,6 +201,14 @@
     <Compile Include="Migrations\202008240446031_AddingPrice.designer.cs">
       <DependentUpon>202008240446031_AddingPrice.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202008250213161_AddingAttributesforBag.cs" />
+    <Compile Include="Migrations\202008250213161_AddingAttributesforBag.designer.cs">
+      <DependentUpon>202008250213161_AddingAttributesforBag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008250249197_AddingAttributesforBag2.cs" />
+    <Compile Include="Migrations\202008250249197_AddingAttributesforBag2.designer.cs">
+      <DependentUpon>202008250249197_AddingAttributesforBag2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Bag.cs" />
     <Compile Include="Models\BagsColors.cs" />
@@ -249,6 +257,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202008240446031_AddingPrice.resx">
       <DependentUpon>202008240446031_AddingPrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008250213161_AddingAttributesforBag.resx">
+      <DependentUpon>202008250213161_AddingAttributesforBag.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008250249197_AddingAttributesforBag2.resx">
+      <DependentUpon>202008250249197_AddingAttributesforBag2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

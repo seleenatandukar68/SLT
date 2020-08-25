@@ -5,8 +5,10 @@ using System.Web;
 
 namespace SLT.ViewModel
 {
-    public class BagViewModel
+    public class BagDTO
     {
-
+        public int BagId { get; set; }
+        public string BagBrand { get; set; }
+        public byte[] FileContent { get; set; }
     }
 }
