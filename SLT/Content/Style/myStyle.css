@@ -76,18 +76,43 @@ body {
 
 img:hover {
     /*box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);*/
-    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 1);
+   /* box-shadow: 0 0 2px 1px rgba(0, 0, 0, 1);*/
 }
 
+/*Caption under the images rendered*/
 .caption {
     width: 100%;
     height: auto;
     border-radius: 4px;
-    background-color: white;
+    background-color: #f7f7f76e;
     border: 1px solid #ddd;
     color: black;
     font-weight: bold;
     margin-top: 2px;
     padding: 5px;
-    text-align:center;
+    text-align: center;
+}
+/* Closable button inside the image */
+.closebtn {
+    position: relative;
+   
+    left: 82%;
+    color: #f9f6f6;
+    font-size: 30px;
+    cursor: pointer;
+    background: red;
+    border: 1px solid white;
+    border-radius: 5px;
+    max-height: 20px;
+}
+.imgholder > .close {
+    position: relative;
+    top: 0;
+    right: 0;
+}
+
+.imgholder> .close {
+    top: 20px;
+    right: 1px;
+    z-index: 100;
 }

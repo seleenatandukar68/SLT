@@ -15,12 +15,13 @@ namespace SLT.Models
         public int PicId { get; set; }
         public int BagId { get; set; }
         //public int ColorId { get; set; }
-        [Required]        
+        
         [Display(Name = "Select Picture")]
         public string FileName { get; set; }
         public string Extension { get; set; }
         public byte[] FileContent { get; set; }
 
+        public int Order { get; set; }
         public virtual Bag Bag { get; set; }
     }
 }

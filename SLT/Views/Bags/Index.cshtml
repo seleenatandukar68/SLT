@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SLT.ViewModel.BagDTO>
+﻿@model IEnumerable<SLT.DTO.BagDTO>
 
 @{
     ViewBag.Title = "Index";
@@ -24,7 +24,7 @@
 
                 <div class="column">
                     <div class="content">
-                        <a href="@Url.Action("Details", "Bags", new { id = item.BagId })" title="Edit">
+                        <a href="@Url.Action("Details", "Bags", new { id = item.BagId })" title="View">
                             <img class="img img-responsive"
                                  src="data:image/jpg;base64,@Convert.ToBase64String(item.FileContent)" />
                             </a>

@@ -59,6 +59,14 @@
                             <div class="col-md-8"> @Html.DisplayFor(model => model.Cost)</div>
                         </div>
                         <div class="row">
+                            <div class="col-md-4"> @Html.DisplayNameFor(model => model.sellCost)</div>
+                            <div class="col-md-8"> @Html.DisplayFor(model => model.sellCost)</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4"> @Html.DisplayNameFor(model => model.Quantity)</div>
+                            <div class="col-md-8"> @Html.DisplayFor(model => model.Quantity)</div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-4"> @Html.DisplayNameFor(model => model.ColorList)</div>
                             <div class="col-md-8">
                                 @foreach (var item in Model.ColorList)

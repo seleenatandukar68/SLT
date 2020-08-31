@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
 namespace SLT.Models
 {
     public class Bag
-    {
+    {      
+        public Bag() { }
         public int BagId { get; set; }
         [Required]
         [Display(Name = "Brand Name")]
@@ -28,13 +30,9 @@ namespace SLT.Models
         [DataType(DataType.Upload)]
         [Display(Name = "Select File")]
         public HttpPostedFileBase[] files { get; set; }
-
-
         public int CategoryId { get; set; } // many to one with category
         [ForeignKey("CategoryId")]
         public virtual Category Category { get; set; }
-
-
         public virtual ICollection<BagsColors> BagsColors { get; set; } // many to many with colors 
 
 
