@@ -10,17 +10,31 @@ using SLT;
 using SLT.Models;
 using SLT.DAL;
 using System.IO;
+using System.Diagnostics;
+using SLT.DTO;
+using System.Data.Entity.Migrations;
+using SLT.Interface;
 
 namespace SLT.Controllers
 {
     public class BagsController : Controller
     {
-        private BagReporsitory  bagRepo = new BagReporsitory();
-        private SLTDbContext db = new SLTDbContext();
+      
+
+        private IBagRepository bagRepo;
+
+        public BagsController()
+        {
+            this.bagRepo= new BagReporsitory(new SLTDbContext());
+        }
+       
+    
         // GET: Bags
         public ActionResult Index()
         {
-            return View(bagRepo.GetBags());
+            var data = bagRepo.GetGroupedBags();                                                
+                 
+            return View(data);
         }
 
         // GET: Bags/Details/5
@@ -32,9 +46,7 @@ namespace SLT.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Bag bag = bagRepo.GetBagById(id);
-            //List<SelectListItem> selectListItems = bagRepo.GetCategories();
-            //selectListItems.Find(c => c.Value == id.ToString()).Selected = true;
-            //bag.CategoryList = selectListItems;
+        
             if (bag == null)
             {
                 return HttpNotFound();
@@ -49,7 +61,9 @@ namespace SLT.Controllers
             Bag bag = new Bag();            
         
             bag.CategoryList = bagRepo.GetCategories();
-            bag.ColorList = bagRepo.GetColors();
+            
+           
+            bag.ColorList = bagRepo.GetColors().ToList();
             return View(bag);
         }
 
@@ -71,22 +85,42 @@ namespace SLT.Controllers
                         {
                             BagsPictures.Add(FileUpload(file));
                         }
+                        else
+                        {
+                            Picture Fd = new Picture();
+                            Fd.FileName = "default";
+                            Fd.Extension = "png";
+                            System.Drawing.Image defaultImage = System.Drawing.Image.FromFile(Server.MapPath("~/Images/default.png"));
+                            using (MemoryStream ms = new MemoryStream())
+                            {
+                                defaultImage.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                                Fd.FileContent = ms.ToArray();
+                            }
+                            BagsPictures.Add(Fd);
+                        }
                     }
-                    bag.BagsPictures = BagsPictures;
+                    
                 }
+                
+                bag.BagsPictures = BagsPictures;
                 bagRepo.AddBag(bag);
                 return RedirectToAction("Index");
             }
-
+            else
+            {
+                bag.ColorList = bagRepo.GetColors().ToList();
+                bag.CategoryList = bagRepo.GetCategories();
+            }
             return View(bag);
         }
         [HttpPost]
         public Picture FileUpload(HttpPostedFileBase files)
         {
+            int i = 1;
             Picture Fd = new Picture();
             String FileExt = Path.GetExtension(files.FileName).ToUpper();
 
-            if (FileExt == ".PNG" || FileExt == ".JPG")
+            if (FileExt == ".PNG" || FileExt == ".JPG"|| FileExt == ".JPEG")
             {
                 Stream str = files.InputStream;
                 BinaryReader Br = new BinaryReader(str);
@@ -95,6 +129,8 @@ namespace SLT.Controllers
                
                 Fd.FileName = files.FileName;
                 Fd.FileContent = FileDet;
+                Fd.Order = i;
+                i++;
 
                 
             }
@@ -118,8 +154,8 @@ namespace SLT.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Bag bag = bagRepo.GetBagById(id);
-            List<SelectListItem> selectListItems = bagRepo.GetCategories();
-            selectListItems.Find(c => c.Value == id.ToString()).Selected = true;
+            List<SelectListItem> selectListItems = bagRepo.GetCategories().ToList();
+            selectListItems.Find(c => c.Value == bag.CategoryId.ToString()).Selected = true;
             bag.CategoryList = selectListItems;
             if (bag == null)
             {
@@ -137,9 +173,20 @@ namespace SLT.Controllers
         {
             if (ModelState.IsValid)
             {
-                bagRepo.UpdateBag(bag);
-                //db.Entry(bag).State = EntityState.Modified;
-                //db.SaveChanges();
+                List<Picture> BagsPictures = new List<Picture>();
+                if (bag.files.Length > 0)
+                {
+                    foreach (HttpPostedFileBase file in bag.files)
+                    {
+                        if (file != null)
+                        {                           
+                     
+                            BagsPictures.Add(FileUpload(file));
+                        }
+                    }
+                    bag.BagsPictures = BagsPictures;
+                }
+                bagRepo.UpdateBag(bag);             
                 return RedirectToAction("Index");
             }
             return View(bag);
@@ -152,7 +199,7 @@ namespace SLT.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Bag bag = db.Bags.Find(id);
+            Bag bag = bagRepo.Delete(id);
             if (bag == null)
             {
                 return HttpNotFound();
@@ -165,19 +212,33 @@ namespace SLT.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Bag bag = db.Bags.Find(id);
-            db.Bags.Remove(bag);
-            db.SaveChanges();
+            bagRepo.DeleteConfirmed(id);
+            bagRepo.Save();
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
+        public JsonResult DeletePic (int id)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+
+            return Json(bagRepo.DeletePic(id), JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public JsonResult UpdatePic(List<Picture> pictures)
+        {
+
+        foreach(var item in pictures)
+            {
+                bagRepo.UpdatePic(item);
+                bagRepo.Save();
+            }
+           
+            return Json(new
+            {
+                resut = "OK"
+            });
+
+        }
+     
     }
 }

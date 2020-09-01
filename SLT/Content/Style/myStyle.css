@@ -1,0 +1,118 @@
+﻿body {
+}
+.myCircle {
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    padding: 8px;
+   
+    display: inline-block;
+}
+
+hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #131313;
+}
+.page-header {
+    padding-bottom: 9px;
+    margin: 40px 0 20px;
+    border-bottom: 1px solid #1f1f1f;
+}
+body {
+    background-color: #f1f1f1;
+   
+}
+/* Create three equal columns that sits next to each other */
+
+
+* Add padding BETWEEN each column */
+.row,
+.row > .column {
+    padding: 8px;
+}
+
+/* Create four equal columns that floats next to each other */
+.column {
+    float: left;
+    width: 25%;
+}
+
+/* Clear floats after rows */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Content */
+.content {
+    
+    padding: 10px;
+    margin: 2px;
+}
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 900px) {
+    .column {
+        width: 50%;
+    }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+    .column {
+        width: 100%;
+    }
+}
+.img {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+   
+    width: 100%;
+    height: 150px;
+}
+
+img:hover {
+    /*box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);*/
+   /* box-shadow: 0 0 2px 1px rgba(0, 0, 0, 1);*/
+}
+
+/*Caption under the images rendered*/
+.caption {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    background-color: #f7f7f76e;
+    border: 1px solid #ddd;
+    color: black;
+    font-weight: bold;
+    margin-top: 2px;
+    padding: 5px;
+    text-align: center;
+}
+/* Closable button inside the image */
+.closebtn {
+    position: relative;
+   
+    left: 82%;
+    color: #f9f6f6;
+    font-size: 30px;
+    cursor: pointer;
+    background: red;
+    border: 1px solid white;
+    border-radius: 5px;
+    max-height: 20px;
+}
+.imgholder > .close {
+    position: relative;
+    top: 0;
+    right: 0;
+}
+
+.imgholder> .close {
+    top: 20px;
+    right: 1px;
+    z-index: 100;
+}

@@ -1,39 +1,64 @@
-﻿@model IEnumerable<SLT.Models.Bag>
+﻿@model IEnumerable<SLT.DTO.BagDTO>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.BagBrand)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cost)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.BagBrand)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cost)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.BagId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.BagId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.BagId })
-        </td>
-    </tr>
-}
+    @**@
 
-</table>
+<div class="container-fluid">
+    <div class="row">
+        <div class="page-header">
+            <div class="row">
+                @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+                @*<input type="button" value="Create" class="btn btn-primary" />*@
+            </div>
+        </div>
+     </div>
+    <div class="row">
+       
+            @foreach (var item in Model)
+            { 
+
+                <div class="column">
+                    <div class="content">
+                        <a href="@Url.Action("Details", "Bags", new { id = item.BagId })" title="View">
+                            <img class="img img-responsive"
+                                 src="data:image/jpg;base64,@Convert.ToBase64String(item.FileContent)" />
+                            </a>
+
+
+                            <div class="caption">  @Html.DisplayFor(modelItem => item.BagBrand) </div>
+
+                    </div>
+                </div>
+                
+                
+           
+            }
+            
+     </div>
+</div>
+
+        @*@foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BagBrand)
+                </td>
+
+                <td>
+                    <img class="imgSlider img-responsive"
+                         src="data:image/jpg;base64,@Convert.ToBase64String(item.FileContent)" />
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.BagId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.BagId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.BagId })
+                </td>
+            </tr>
+        }*@
+
+    

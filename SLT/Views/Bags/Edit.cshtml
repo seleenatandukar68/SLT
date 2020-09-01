@@ -4,68 +4,144 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
-
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Bags", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <h4>Bag</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.BagId)
-    <div class="form-group">
-        @Html.LabelFor(model => model.CategoryList, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(x => Model.CategoryId, new SelectList(Model.CategoryList, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "Category" })
-        </div>
 
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.BagBrand, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.BagBrand, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.BagBrand, "", new { @class = "text-danger" })
+    <div class="form-horizontal">
+        <div class="row">
+            <div class="page-header row">
+                <div class="col-md-6 pull-left">
+                    <h4>Edit Bags</h4>
+                </div>
+                <div class="col-md-6 pull-left">
+                    <h4>Edit Images</h4>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class=" col-md-6">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.BagId, htmlAttributes: new { @id = "hidBagId"})
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CategoryList, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.DropDownListFor(x => Model.CategoryId, new SelectList(Model.CategoryList, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "Category" })
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BagBrand, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.BagBrand, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.BagBrand, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Cost, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Cost, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Cost, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.sellCost, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.sellCost, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.sellCost, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ColorList, htmlAttributes: new { @class = "control-label col-md-4" })
+
+                    <div class="col-md-8">
+                        @for (int i = 0; i < Model.ColorList.Count; i++)
+                        {
+                            if (i % 4 == 0)
+                            {
+                                @:
+                                <tr></tr>
+                            }
+                            <td>
+                                @Html.CheckBoxFor(x => x.ColorList[i].isChecked, new { @class = "custom-checkbox" })
+                                <label>@Model.ColorList[i].ColorName</label>
+                                @Html.HiddenFor(x => x.ColorList[i].Id)
+
+                            </td>
+                        }
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class = "control-label col-md-4" > Add Images </label>
+                 
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.files, "", new { @type = "file", @multiple = "multiple" })
+                        @Html.ValidationMessageFor(model => model.files, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-4 col-md-8">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="row" id="sortable">
+
+                    @foreach (var item in Model.BagsPictures)
+                    {
+
+
+                        <div class="column">
+                            <div>
+
+                                <div class="imgholder">
+                                    <div class="data">
+                                        @Html.HiddenFor(model => item.PicId, htmlAttributes: new { @class = "PicId" })
+                                        @Html.HiddenFor(model => item.Order, htmlAttributes: new { @class = "orderNo" })
+
+                                    </div>
+                                    <span onclick="DeleteImage(this, @item.PicId)" class="close">&times;</span>
+                                    <img class="img img-responsive"
+                                         src="data:image/jpg;base64,@Convert.ToBase64String(item.FileContent)" />
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    }
+
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-offset-8 col-md-12">
+                            <button onclick="SaveOrder()"class="btn btn-default"> Save Order </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Cost, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Cost, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Cost, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.ColorList, htmlAttributes: new { @class = "control-label col-md-2" })
-
-        <div class="col-md-10">
-            @for (int i = 0; i < Model.ColorList.Count; i++)
-            {
-                if (i % 4 == 0)
-                {
-                    @:
-                    <tr></tr>
-                }
-                <td>
-                    @Html.CheckBoxFor(x => x.ColorList[i].isChecked, new { @class = "custom-checkbox" })
-                    <label>@Model.ColorList[i].ColorName</label>
-                    @Html.HiddenFor(x => x.ColorList[i].Id)
-
-                </td>
-            }
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
-        </div>
-    </div>
-</div>
 }
 
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+@section scripts{
+    <script src="~/ViewScripts/Bags/Edit.js"></script>
+
+
+}

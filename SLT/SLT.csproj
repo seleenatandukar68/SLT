@@ -167,6 +167,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\Style\myStyle.css" />
     <Content Include="Content\Style\Slider.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -177,7 +178,10 @@
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="ViewScripts\Bags\Edit.js" />
     <Content Include="ViewScripts\Slider.js" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -185,36 +189,35 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BagsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="DAL\BagReporsitory.cs" />
-    <Compile Include="DAL\SLTRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Interface\IBagRepository.cs" />
-    <Compile Include="Interface\ISLTRepository.cs" />
-    <Compile Include="Migrations\202008130425470_InitialCreate.cs" />
-    <Compile Include="Migrations\202008130425470_InitialCreate.designer.cs">
-      <DependentUpon>202008130425470_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\202008240255006_Initial.cs" />
+    <Compile Include="Migrations\202008240255006_Initial.designer.cs">
+      <DependentUpon>202008240255006_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202008160138552_noGuid.cs" />
-    <Compile Include="Migrations\202008160138552_noGuid.designer.cs">
-      <DependentUpon>202008160138552_noGuid.cs</DependentUpon>
+    <Compile Include="Migrations\202008240446031_AddingPrice.cs" />
+    <Compile Include="Migrations\202008240446031_AddingPrice.designer.cs">
+      <DependentUpon>202008240446031_AddingPrice.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202008160412066_PicUpload.cs" />
-    <Compile Include="Migrations\202008160412066_PicUpload.designer.cs">
-      <DependentUpon>202008160412066_PicUpload.cs</DependentUpon>
+    <Compile Include="Migrations\202008250213161_AddingAttributesforBag.cs" />
+    <Compile Include="Migrations\202008250213161_AddingAttributesforBag.designer.cs">
+      <DependentUpon>202008250213161_AddingAttributesforBag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008250249197_AddingAttributesforBag2.cs" />
+    <Compile Include="Migrations\202008250249197_AddingAttributesforBag2.designer.cs">
+      <DependentUpon>202008250249197_AddingAttributesforBag2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008260203512_AddOrderBy.cs" />
+    <Compile Include="Migrations\202008260203512_AddOrderBy.designer.cs">
+      <DependentUpon>202008260203512_AddOrderBy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008260533202_SaveChangedOrderBy.cs" />
+    <Compile Include="Migrations\202008260533202_SaveChangedOrderBy.designer.cs">
+      <DependentUpon>202008260533202_SaveChangedOrderBy.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="ModelBuilderExtension.cs" />
-    <Compile Include="Models\Bag.cs" />
-    <Compile Include="Models\BagsColors.cs" />
-    <Compile Include="Models\Category.cs" />
-    <Compile Include="Models\Color.cs" />
-    <Compile Include="Models\IndexData.cs" />
-    <Compile Include="Models\Picture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SLTDbContext.cs" />
-    <Compile Include="ViewModel\BagViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -245,18 +248,33 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202008130425470_InitialCreate.resx">
-      <DependentUpon>202008130425470_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202008240255006_Initial.resx">
+      <DependentUpon>202008240255006_Initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202008160138552_noGuid.resx">
-      <DependentUpon>202008160138552_noGuid.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202008240446031_AddingPrice.resx">
+      <DependentUpon>202008240446031_AddingPrice.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202008160412066_PicUpload.resx">
-      <DependentUpon>202008160412066_PicUpload.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202008250213161_AddingAttributesforBag.resx">
+      <DependentUpon>202008250213161_AddingAttributesforBag.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008250249197_AddingAttributesforBag2.resx">
+      <DependentUpon>202008250249197_AddingAttributesforBag2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008260203512_AddOrderBy.resx">
+      <DependentUpon>202008260203512_AddOrderBy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008260533202_SaveChangedOrderBy.resx">
+      <DependentUpon>202008260533202_SaveChangedOrderBy.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataAccessLibrary\DataAccessLibrary.csproj">
+      <Project>{1feb38a3-e92e-4e88-82bd-97de651a735f}</Project>
+      <Name>DataAccessLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
