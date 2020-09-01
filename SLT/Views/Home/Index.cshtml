@@ -4,50 +4,20 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
-<div>
-    <h4>Bag</h4>
-    <hr />
-    <table>
-
-            <tr>
-
-                <th>  ColorId </th>
-                <th> BagId </th>
-            </tr>
-            @foreach (var item in Model)
-            {
-
-    <tr>
 
 
-        <td>
-            @Html.DisplayFor(model => item.BagId)
+<div class="container-fluid ">
+    <div class="page-header">
+        <div class="row">
+            <h2>
+                "WELCOME TO DEMO INVENTORY USING ENTITYFRAMEWORK BY SELEENA"
+            </h2> 
 
-        </td>
-        <td>
-            @Html.DisplayFor(model => item.ColorId)
+        </div>
 
-        </td>
-        <td>
-            @Html.DisplayFor(model => item.Bag.BagBrand)
-        </td>
-        <td>
-            @Html.DisplayFor(model => item.Color.ColorName)
-        </td>
-
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.BagId })
-        </td>
-    </tr>
-            }
-
-        
-           
-        </table>
+    </div>
+    
+    
 
 </div>
-<p>|
-    @Html.ActionLink("Back to List", "Index")
-</p>
+

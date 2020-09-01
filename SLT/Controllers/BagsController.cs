@@ -60,7 +60,7 @@ namespace SLT.Controllers
         {
             Bag bag = new Bag();            
         
-           bag.CategoryList = bagRepo.GetCategories();
+            bag.CategoryList = bagRepo.GetCategories();
             
            
             bag.ColorList = bagRepo.GetColors().ToList();
@@ -85,13 +85,32 @@ namespace SLT.Controllers
                         {
                             BagsPictures.Add(FileUpload(file));
                         }
+                        else
+                        {
+                            Picture Fd = new Picture();
+                            Fd.FileName = "default";
+                            Fd.Extension = "png";
+                            System.Drawing.Image defaultImage = System.Drawing.Image.FromFile(Server.MapPath("~/Images/default.png"));
+                            using (MemoryStream ms = new MemoryStream())
+                            {
+                                defaultImage.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                                Fd.FileContent = ms.ToArray();
+                            }
+                            BagsPictures.Add(Fd);
+                        }
                     }
-                    bag.BagsPictures = BagsPictures;
+                    
                 }
+                
+                bag.BagsPictures = BagsPictures;
                 bagRepo.AddBag(bag);
                 return RedirectToAction("Index");
             }
-
+            else
+            {
+                bag.ColorList = bagRepo.GetColors().ToList();
+                bag.CategoryList = bagRepo.GetCategories();
+            }
             return View(bag);
         }
         [HttpPost]

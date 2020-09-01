@@ -27,7 +27,19 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    @Html.ActionLink("Create", "Create", "Bags", new { area = "" }, new { @class = "navbar-brand" })
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                          Bags Inventory 
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Create", "Create", "Bags")</li>
+                            <li>@Html.ActionLink("Details", "Index", "Bags")</li>
+                           
+                        </ul>
+                    </li>
+                
+
                 </ul>
             </div>
         </div>

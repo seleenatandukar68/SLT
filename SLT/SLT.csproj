@@ -247,7 +247,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Images\" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202008240255006_Initial.resx">
       <DependentUpon>202008240255006_Initial.cs</DependentUpon>

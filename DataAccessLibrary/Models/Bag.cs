@@ -13,16 +13,16 @@ namespace SLT.Models
     {      
         public Bag() { }
         public int BagId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Brand Name is required.")]
         [Display(Name = "Brand Name")]
         public string BagBrand { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Cost Price is required.")]
         [Display(Name = "Cost Price")]
         public float Cost { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Selling Price is required.")]
         [Display(Name = "Selling Price")]
         public float sellCost { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Quantity is required.")]
         [Display(Name = "Quantity")]
         public int Quantity { get; set; }
         [NotMapped]
@@ -30,14 +30,20 @@ namespace SLT.Models
         [DataType(DataType.Upload)]
         [Display(Name = "Select File")]
         public HttpPostedFileBase[] files { get; set; }
+
+        [Required(ErrorMessage = "{0} is required.")]
+        public int SelectedCountryId { get; set; }
         public int CategoryId { get; set; } // many to one with category
         [ForeignKey("CategoryId")]
+       
         public virtual Category Category { get; set; }
         public virtual ICollection<BagsColors> BagsColors { get; set; } // many to many with colors 
 
 
         [NotMapped]
         [Display(Name = "Colors")]
+        [Required (ErrorMessage = "Color is required")]
+       
         public List<Color> ColorList { get; set; }
 
         [NotMapped]
@@ -49,6 +55,26 @@ namespace SLT.Models
 
         [NotMapped]
         public Picture thumbPic { get; set; }
+
+        public IEnumerable<ValidationResult> ValidationResults (ValidationContext validationContext)
+        {
+            int count = 0;
+            foreach (var item in ColorList)
+            {
+                if (item.isChecked == true)
+                {
+                    count = count + 1; 
+                }
+            }
+
+            if (count == 0)
+            {
+                yield return new ValidationResult("Check atlease one color", new[] { "ColorList" });
+
+            }
+
+        }
+       
 
     }
 }

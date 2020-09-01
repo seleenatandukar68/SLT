@@ -133,6 +133,10 @@
     <Compile Include="Migrations\202008310112206_Check.designer.cs">
       <DependentUpon>202008310112206_Check.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202008310214141_Validation.cs" />
+    <Compile Include="Migrations\202008310214141_Validation.designer.cs">
+      <DependentUpon>202008310214141_Validation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Bag.cs" />
     <Compile Include="Models\BagsColors.cs" />
@@ -173,6 +177,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202008310112206_Check.resx">
       <DependentUpon>202008310112206_Check.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008310214141_Validation.resx">
+      <DependentUpon>202008310214141_Validation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

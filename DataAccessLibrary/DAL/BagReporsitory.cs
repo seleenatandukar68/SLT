@@ -20,7 +20,7 @@ namespace SLT.DAL
 {
     public class BagReporsitory : IBagRepository, IDisposable
     {
-        private UnitOfWork unitOfWork = new UnitOfWork();
+       
         private SLTDbContext SLTDbContext;
 
         public BagReporsitory (SLTDbContext context)
@@ -47,7 +47,8 @@ namespace SLT.DAL
         public IEnumerable<Bag> GetBags()
         {
 
-            return unitOfWork.BagRepository.Get(includeProperties: "Pictures");
+            return SLTDbContext.Bags.Include(b => b.BagsPictures);
+              
              //(from b in SLTDbContext.Bags
              // join p in SLTDbContext.Pictures on b.BagId equals p.BagId
              // select b);
@@ -57,7 +58,7 @@ namespace SLT.DAL
         {
             
             SLTDbContext.Bags.Add(newBag);
-            SLTDbContext.SaveChanges();
+            
            
             foreach( var item in newBag.ColorList)
             {

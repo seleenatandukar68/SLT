@@ -14,20 +14,7 @@ namespace SLT.Controllers
         SLTRepository repo = new SLTRepository();
         public ActionResult Index()
         {
-            return View(repo.GetBagsColors());
-         
-
-
-            //UserDetails = db.Products.Where(o => lstProductIds.Contains(o.ProductID.ToString()))
-            //    .SelectMany(o => o.Users.Select(u => new { o, u }))
-            //    .Select(s => new UserProduct
-            //    {
-            //        ProductId = s.o.ProductId.ToString(),
-            //        UserId = s.u.UserId.ToString()
-            //    }).ToList();
-
-
-
+            return View();     
 
         }
     }

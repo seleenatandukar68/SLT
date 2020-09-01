@@ -86,16 +86,24 @@
                 </div>
            
     </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-4">
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.BagId }, new { @class = "btn btn-default" })
+                </div>
+                <div class="col-md-4">
+                    @Html.ActionLink("Delete", "Delete", new { id = Model.BagId }, new { @class = "btn btn-default" })
+                </div>
+                <div class="col-md-4">
+                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+                </div>
+            </div>
+        </div>
 </div>
 
 <div>
    
- 
 
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.BagId }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
 
 </div>
 @*<script>
